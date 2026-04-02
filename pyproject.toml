@@ -1,0 +1,68 @@
+[build-system]
+requires = ["hatchling>=1.27.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "opendataloader-pdf-mcp"
+version = "0.1.0"
+description = "Shareable MCP server for PDF extraction built on opendataloader-pdf"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+  { name = "opendataloader-pdf-mcp contributors" },
+]
+license = { text = "MIT" }
+dependencies = [
+  "mcp[cli]>=1.26.0",
+  "opendataloader-pdf>=2.2.0,<3",
+]
+keywords = ["mcp", "pdf", "opendataloader", "opencode"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Software Development :: Libraries",
+]
+
+[project.urls]
+Homepage = "https://github.com/bokjk/opendataloader-pdf-mcp"
+Issues = "https://github.com/bokjk/opendataloader-pdf-mcp/issues"
+Source = "https://github.com/bokjk/opendataloader-pdf-mcp"
+
+[project.optional-dependencies]
+dev = [
+  "build>=1.2.2",
+  "pytest>=8.0.0",
+  "twine>=6.1.0",
+]
+
+[project.scripts]
+opendataloader-pdf-mcp = "opendataloader_pdf_mcp.server:main"
+pdf-analyzer-mcp = "pdf_analyzer.server:legacy_main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["opendataloader_pdf_mcp", "pdf_analyzer"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "/opendataloader_pdf_mcp",
+  "/pdf_analyzer",
+  "/tests",
+  "/tests/fixtures",
+  "/skills",
+  "/CHANGELOG.md",
+  "/README.md",
+  "/LICENSE",
+  "/requirements.txt",
+  "/requirements-dev.txt",
+  "/server.py",
+  "/test_server.py",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
